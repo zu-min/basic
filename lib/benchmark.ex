@@ -8,4 +8,13 @@ defmodule Benchmark do
       |> elem(0)
       |> Kernel./(1000000)
   end
+
+  def timed_enum() do
+      :timer.tc( fn ->
+        1..100000000
+        |> Enum.to_list
+        |> Enum.map(& &1 * 2 ) end )
+        |> elem(0)
+        |> Kernel./(1000000)
+    end
 end
