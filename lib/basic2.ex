@@ -3,11 +3,11 @@ defmodule Basic2 do
     :timer.tc( fn ->
     "data.json"
     |> File.stream!
-    |> Flow.from_enumerable(stages: stage) end)
+    |> Flow.from_enumerable(stages: stage)
+    |> Flow.map(fn d -> Poison.decode!(d) end)
+    |> Flow.filter(fn d -> d["age"] <= 20 end)
+    |> Enum.count end)
     |> elem(0)
     |> Kernel./(1000000)
-    # |> Flow.map(fn d -> Poison.decode!(d) end)
-    # |> Flow.filter(fn d -> d["age"] <= 20 end)
-    # |> Enum.count
   end
 end
