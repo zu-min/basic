@@ -6,7 +6,7 @@ defmodule Benchmark do
       |> Flow.map(& &1 * 2)
       |> Enum.to_list end)
       |> elem(0)
-      |> Kernel./(1000000)
+      |> IO.puts Kernel./(1000000)
   end
 
   def timed_flow2 do
